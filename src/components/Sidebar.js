@@ -1,48 +1,45 @@
+/* eslint-disable react/jsx-no-comment-textnodes */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import './Navbar.css';
 
-function Sidebar() {
+function Navbar() {
   return (
-    <div className="sidebar">
-      <div className="navigation">
-        <div className="nav-header">
-          <span className="nav-header-text">Babylon Library</span>
-        </div>
-        <ul className="nav-links">
-          <li>
-            <NavLink exact to="/" activeClassName="active">
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/fizyka" activeClassName="active">
-              Fizyka <FontAwesomeIcon icon={faAngleRight} />
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/matematyka" activeClassName="active">
-              Matematyka
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/informatyka" activeClassName="active">
-              Informatyka
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/contact" activeClassName="active">
-              Contact
-            </NavLink>
-          </li>
-        </ul>
-        <div className="nav-footer">
-          <span className="nav-footer-text">KXH-RESEARCH 2021-2023</span>
-        </div>
+    <nav className="navbar">
+      <div className="navbar-header">
+        <span className="navbar-header-text">Babylon Library</span>
       </div>
-    </div>
+      <ul className="navbar-links">
+        <li>
+          <NavLink exact to="/" activeClassName="active" className="navbar-link">
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/fizyka" activeClassName="active" className="navbar-link">
+            Fizyka <FontAwesomeIcon icon={faAngleRight} />
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/matematyka" activeClassName="active" className="navbar-link">
+            Matematyka
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/informatyka" activeClassName="active" className="navbar-link">
+            Informatyka
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/contact" activeClassName="active" className="navbar-link">
+            Contact
+          </NavLink>
+        </li>
+      </ul>
+    </nav>
   );
 }
 
-export default Sidebar;
+export default Navbar;
