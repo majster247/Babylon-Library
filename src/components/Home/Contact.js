@@ -5,7 +5,9 @@ const Contact = () => {
   return (
     <div>
       <h1>Contact</h1>
-      <p>Contact information</p>
+      <p>Administrator of site is: Hubert "Majster" Topolski</p>
+      <br></br>
+      <p></p>
     </div>
   );
 };

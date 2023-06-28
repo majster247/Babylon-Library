@@ -4,10 +4,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Home from './components/Home/Home';
 import Fizyka from './components/Fizyka';
-import Matematyka from './components/Matematyka';
+import Matematyka from './components/Matematyka/Matematyka';
 import Informatyka from './components/Informatyka';
-import Contact from './components/Contact';
-import Sidebar from './components/Sidebar';
+import Contact from './components/Home/Contact';
+import Sidebar from './components/Home/Sidebar';
 
 function App() {
   return (

@@ -1,8 +1,6 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import './Navbar.css';
 
 function Navbar() {
@@ -19,7 +17,7 @@ function Navbar() {
         </li>
         <li>
           <NavLink to="/fizyka" activeClassName="active" className="navbar-link">
-            Fizyka <FontAwesomeIcon icon={faAngleRight} />
+            Fizyka
           </NavLink>
         </li>
         <li>
