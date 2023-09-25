@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/static/css/main.9ca5d293.css",
-    "main.js": "/static/js/main.72d8a6f1.js",
+    "main.js": "/static/js/main.8911e907.js",
     "static/js/787.c4fc37f1.chunk.js": "/static/js/787.c4fc37f1.chunk.js",
     "static/media/lexar-jews2.gif": "/static/media/lexar-jews2.5391259892e25a4bdafb.gif",
     "static/media/lexar-jews3.gif": "/static/media/lexar-jews3.95f0fa73b2a10e7d62c8.gif",
     "static/media/lexar-jews.gif": "/static/media/lexar-jews.99cc4a911dfde84bf7a3.gif",
     "index.html": "/index.html",
     "main.9ca5d293.css.map": "/static/css/main.9ca5d293.css.map",
-    "main.72d8a6f1.js.map": "/static/js/main.72d8a6f1.js.map",
+    "main.8911e907.js.map": "/static/js/main.8911e907.js.map",
     "787.c4fc37f1.chunk.js.map": "/static/js/787.c4fc37f1.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9ca5d293.css",
-    "static/js/main.72d8a6f1.js"
+    "static/js/main.8911e907.js"
   ]
 }
