@@ -7,19 +7,19 @@ const Matematyka = () => {
   const [searchText, setSearchText] = useState('');
 
   const toggleSection = (sectionId) => {
-    if (expandedSections.includes(sectionId)) {
-      setExpandedSections(expandedSections.filter((id) => id !== sectionId));
-    } else {
+    if (!expandedSections.includes(sectionId)) {
       setExpandedSections([...expandedSections, sectionId]);
     }
+
+    setExpandedSections(expandedSections.filter((id) => id !== sectionId));
   };
 
   const toggleSubsection = (subsectionId) => {
-    if (expandedSections.includes(subsectionId)) {
-      setExpandedSections(expandedSections.filter((id) => id !== subsectionId));
-    } else {
+    if (!expandedSections.includes((subsectionId))) {
       setExpandedSections([...expandedSections, subsectionId]);
     }
+
+    setExpandedSections(expandedSections.filter((id) => id !== subsectionId));
   };
 
   const handleSearchChange = (event) => {
