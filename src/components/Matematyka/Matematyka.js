@@ -1,10 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Matematyka.css';
 import sections from './MapSite';
+const puppeteer = require('puppeteer');
+
+const Strona = ({ section }) => {
+  const [content, setContent] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (section.site) {
+          const browser = await puppeteer.launch();
+          const page = await browser.newPage();
+          await page.goto(section.site);
+          
+          // Poczekaj na załadowanie treści, można dostosować czas oczekiwania w zależności od potrzeb
+          await page.waitForTimeout(3000);
+          
+          const extractedContent = await page.evaluate(() => document.querySelector('.middle').innerHTML);
+          
+          setContent(extractedContent);
+          
+          await browser.close();
+        }
+      } catch (error) {
+        console.error('Błąd podczas pobierania strony:', error);
+      }
+    };
+
+    if (section.site) {
+      fetchData();
+    }
+  }, [section.site]);
+
+  return (
+    <div className="content">
+      <h2>{section.name}</h2>
+      <div dangerouslySetInnerHTML={{ __html: content }} />
+    </div>
+  );
+};
 
 const Matematyka = () => {
   const [expandedSections, setExpandedSections] = useState([]);
   const [searchText, setSearchText] = useState('');
+  const [showMenu, setShowMenu] = useState(true);
 
   const toggleSection = (sectionId) => {
     if (expandedSections.includes(sectionId)) {
@@ -63,13 +103,29 @@ const Matematyka = () => {
     return allSubsections;
   };
 
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
+
   const renderSubsections = (subsections) => {
     return (
       <ul className="subsubsection-list">
         {subsections.map((subsection) => (
           <li key={subsection.id}>
             <button onClick={() => toggleSubsection(subsection.id)}>
-              {subsection.name}
+              {subsection.subsubsections ? (
+                <span>{subsection.name}</span>
+              ) : (
+                // eslint-disable-next-line jsx-a11y/anchor-is-valid
+                <a href="#"
+                   onClick={(e) => {
+                     e.preventDefault();
+                     toggleMenu();
+                     toggleSection(subsection.id);
+                   }}>
+                  {subsection.name}
+                </a>
+              )}
               {subsection.subsubsections && (expandedSections.includes(subsection.id) ? ' ▼' : ' ►')}
             </button>
             {expandedSections.includes(subsection.id) && subsection.subsubsections && (
@@ -85,58 +141,80 @@ const Matematyka = () => {
     const filteredSections = filterSections(sections, searchText);
 
     return (
-    <div>
-      <ul className="section-list">
-        {filteredSections.map((section) => (
-          <li key={section.id}>
-            {section.subsubsections ? (
-              <button onClick={() => toggleSection(section.id)}>
-                {section.name}
-                {expandedSections.includes(section.id) ? ' ▼' : ' ►'}
-              </button>
-            ) : (
-              <button onClick={() => console.log(section.data)}>
-                {section.name}
-              </button>
-            )}
-            {expandedSections.includes(section.id) && section.subsubsections && (
-              <ul className="subsection-list">
-                {filterSubsections(section.subsubsections, searchText).map((subsection) => (
-                  <li key={subsection.id}>
-                    <button onClick={() => toggleSubsection(subsection.id)}>
-                      {subsection.name}
-                      {subsection.subsubsections && (expandedSections.includes(subsection.id) ? ' ▼' : ' ►')}
-                    </button>
-                    {expandedSections.includes(subsection.id) && subsection.subsubsections && (
-                      renderSubsections(subsection.subsubsections)
-                    )}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
-        ))}
-      </ul>
+      <div>
+        <ul className="section-list" style={{ display: showMenu ? 'block' : 'none' }}>
+          {filteredSections.map((section) => (
+            <li key={section.id}>
+              {section.subsubsections ? (
+                <button onClick={() => toggleSection(section.id)}>
+                  {section.name}
+                  {expandedSections.includes(section.id) ? ' ▼' : ' ►'}
+                </button>
+              ) : (
+                // eslint-disable-next-line jsx-a11y/anchor-is-valid
+                <a href="#"
+                   onClick={(e) => {
+                     e.preventDefault();
+                     toggleMenu();
+                     console.log(section.data);
+                   }}>
+                  {section.name}
+                </a>
+              )}
+              {expandedSections.includes(section.id) && section.subsubsections && (
+                <ul className="subsection-list">
+                  {filterSubsections(section.subsubsections, searchText).map((subsection) => (
+                    <li key={subsection.id}>
+                      <button onClick={() => toggleSubsection(subsection.id)}>
+                        {subsection.subsubsections ? (
+                          <span>{subsection.name}</span>
+                        ) : (
+                          // eslint-disable-next-line jsx-a11y/anchor-is-valid
+                          <a href="#"
+                             onClick={(e) => {
+                               e.preventDefault();
+                               toggleMenu();
+                               toggleSection(subsection.id);
+                             }}>
+                            {subsection.name}
+                          </a>
+                        )}
+                        {subsection.subsubsections && (expandedSections.includes(subsection.id) ? ' ▼' : ' ►')}
+                      </button>
+                      {expandedSections.includes(subsection.id) && subsection.subsubsections && (
+                        renderSubsections(subsection.subsubsections)
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
       </div>
     );
   };
 
   return (
     <div>
-    <div className='MainPage'>
-      <h1>Matematyka</h1>
-      <h4><p>Pragne gorąco podziękować Matemaks Michał Budzyński oraz jego dziełu w postaci strony <a href='https://www.matemaks.pl/'>Matemaks.pl</a></p></h4>
-      <p>Gdyby nie rozwój tej strony nie powstałaby idea tego projektu. A tym bardziej nie tak szybko...</p>
-    </div>
-    <div className="matematyka">
-      <input
-        type="text"
-        placeholder="Wyszukaj..."
-        value={searchText}
-        onChange={handleSearchChange}
-      />
-      {renderSections(sections)}
-    </div>
+      <div className='MainPage'>
+        <h1>Matematyka</h1>
+        <h4>
+          <p>Pragnę gorąco podziękować Matemaks Michał Budzyński oraz jego dziełu w postaci strony <a href='https://www.matemaks.pl/'>Matemaks.pl</a></p>
+        </h4>
+        <p>Gdyby nie rozwój tej strony nie powstałaby idea tego projektu. A tym bardziej nie tak szybko...</p>
+      </div>
+      <div className="matematyka">
+        <input
+          type="text"
+          placeholder="Wyszukaj..."
+          value={searchText}
+          onChange={handleSearchChange}
+        />
+        <button onClick={toggleMenu}>Toggle Menu</button>
+        {renderSections(sections)}
+      </div>
+      
     </div>
   );
 };

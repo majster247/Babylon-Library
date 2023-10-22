@@ -8,19 +8,18 @@
 .title-container h1{
   font-size: 2rem;
   margin-bottom: 1;
-  margin-top: -100px;
+  margin-top: 1%;
   text-align: center;
   
 }
 
 .content{
     height: auto;
-    margin-top: -20px;
+    margin-top: 1%;
     text-align: center;
-    margin-top: 10%;
     font-family: 'Courier New', Courier, monospace;
     font-size: 10;
-    padding: 1px;
+    padding: 1%;
 }
 
 .content img{

@@ -7,7 +7,8 @@ const Contact = () => {
       <h1>Contact</h1>
       <p>Administrator of site is: Hubert "Majster" Topolski</p>
       <br></br>
-      <p></p>
+      <p>Contact forms:</p><br></br>
+      <p>via e-mail: htopolski12@gmail.com</p>
     </div>
   );
 };

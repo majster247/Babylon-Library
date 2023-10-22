@@ -1,7 +1,7 @@
 .app {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100%;
 }
 
 .sidebar {
@@ -12,24 +12,29 @@
 }
 .content {
   flex-grow: 1;
+  padding: 1%;
+  
 }
 
 .footer {
   background-color: #222;
   color: #fff;
-  padding: 10px;
+  padding: 1hv;
   text-align: center;
+  place-items: bottom;
+  display: flex;
+  align-items: flex-end;
 }
 .navigation {
-  padding: 5px;
+  padding: 1hv;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: calc(100% - 40px); /* Odejmujemy wysokość nagłówka i stopki */
+  height: calc(100% - 40hv); /* Odejmujemy wysokość nagłówka i stopki */
 }
 
 .nav-header {
-  margin-bottom: 20px;
+  margin-bottom: 2hv;
 }
 
 .nav-header-text {
